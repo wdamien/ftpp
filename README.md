@@ -6,14 +6,14 @@ A command line utility with one purpose; to watch a directory of files and push 
 
 * It does not sync.
 * It does not download.
-* It only uploads & deletes files from an FTP server.
+* It only uploads & deletes files from a FTP server.
 
 ## Usage 
 `npm i -g ftpp`
- * Create a `yourProject.ftpp` file.
+ * Run `ftpp init` in your project directory to create a `yourProject.ftpp` file.
  * Run: `ftpp`
  * Or if you have multiple *.ftpp files
-    * `ftpp -t test`
+    * `ftpp -c test`
     * where test == test.ftpp
 
 ## *.ftpp files
