@@ -1,0 +1,27 @@
+; Un comment lines as required to overwrite defaults.
+
+; ftp connection details. Passed through to `ftp.connect()`
+; @see https://www.npmjs.com/package/ftp#methods for details
+[ftp]
+; host = your.ftp.host
+; user = your-username
+; password = some_super_secure_password
+
+; ftpp connection settings
+[connectionSettings]
+parallel = 10
+connectionRetry = 3
+
+[paths]
+; remote = /path/to/your/remote/directory/
+; base = cwd();
+; file, dir, glob, or array. Passed through to `chokidar.watch()`
+source = ./
+; source[] = or/use/an/array/values/
+
+; values passed through to the `chokidar.watch()` options value
+; @see https://www.npmjs.com/package/chokidar#api for details
+[watchOptions]
+ignoreInitial = true
+ignored[] = ./node_modules/**/*
+ignored[] = ./.git/**/*

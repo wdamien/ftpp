@@ -1,0 +1,22 @@
+{
+  "name": "ftpp",
+  "version": "1.0.0",
+  "description": "FTPPush used to watch local file and push changes to a local or remove server.",
+  "main": "ftpp.js",
+  "bin": {
+    "ftpp": "ftpp.js"
+  },
+  "author": "wdamein",
+  "license": "MIT",
+  "dependencies": {
+    "async": "^2.5.0",
+    "chokidar": "^1.7.0",
+    "colors": "^1.1.2",
+    "commander": "^2.11.0",
+    "ftp": "^0.3.10",
+    "globby": "^6.1.0",
+    "ini": "^1.3.4",
+    "inquirer": "^3.3.0",
+    "lodash": "^4.17.4"
+  }
+}
