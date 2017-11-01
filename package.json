@@ -1,11 +1,11 @@
 {
   "name": "ftpp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "FTPPush used to watch local file and push changes to a local or remove server.",
   "main": "ftpp.js",
   "repository": {
-    "type" : "git",
-     "url" : "https://github.com/wdamien/ftpp.git"
+    "type": "git",
+    "url": "https://github.com/wdamien/ftpp.git"
   },
   "bin": {
     "ftpp": "ftpp.js"
