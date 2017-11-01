@@ -63,7 +63,7 @@ class Ftpp {
         });
         
         this.ftpConn.on('error', err => {
-            this.logFTP(err, false);
+            this.logFTP(err.message, false);
         });
     }
 
