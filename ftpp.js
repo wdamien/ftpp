@@ -433,6 +433,7 @@ class Ftpp {
             {name:'username', message:'FTP Username'},
             {name:'password', message:'FTP Password'},
             {name:'host', message:'FTP Host'},
+            {name:'remote', message:'Remote Directory'},
             {name:'fileName', message:'Config file name?', default: path.basename(this.cwd)}
         ]).then((answers) => {
             var config = ini.decode(this.getDefaultConfigFile());
@@ -440,6 +441,10 @@ class Ftpp {
                 user: answers.username,
                 password: answers.password,
                 host: answers.host
+            };
+
+            config.paths = {
+                remote: answers.remote
             };
 
             var configString = ini.encode(config);
