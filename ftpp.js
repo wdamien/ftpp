@@ -219,6 +219,12 @@ class Ftpp {
         if (!Array.isArray(watchSource)) {
             watchSource = path.resolve(watchSource);
         }
+        
+        if (this.config.watchOptions && this.config.watchOptions.ignored) {
+            this.config.watchOptions.ignored.forEach(function(item, idx, arr) {
+                arr[idx] = path.resolve(item);
+            });
+        }
 
         var watcher = chokidar.watch(watchSource, this.config.watchOptions);
         watcher
