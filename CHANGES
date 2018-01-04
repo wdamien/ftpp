@@ -1,2 +1,5 @@
+v1.2.0
+* Add new uploadOptions.defaultPermissions option.
+
 v1.0.0
 * initial commit.
