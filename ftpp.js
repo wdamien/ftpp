@@ -17,6 +17,7 @@ class Ftpp {
 
     static get UPLOAD () {  return 1; }
     static get DELETE () {  return 2; }
+    static get ADD () {  return 3; }
 
     constructor() {
         this.complete = false;
@@ -267,7 +268,7 @@ class Ftpp {
     }
 
     handleFileAdd(path, stat) {
-        this.addAction(new FtpAction(Ftpp.UPLOAD, path));
+        this.addAction(new FtpAction(Ftpp.ADD, path));
     }
     
     handleFileChange(path, stat) {
@@ -333,9 +334,9 @@ class Ftpp {
                     if (action.type == Ftpp.DELETE) {
                         _this.logSuccess('Deleting', _this.truncateLocalPath(file));
                         promise = _this.delete(file, action.isDirectory);
-                    } else if (action.type == Ftpp.UPLOAD) {
+                    } else if (action.type == Ftpp.UPLOAD || action.type == Ftpp.ADD) {
                         _this.logSuccess('Uploading', _this.truncateLocalPath(file));
-                        promise = _this.put(file);
+                        promise = _this.put(file, action.type);
                     }
                     promise.then(() => {
                         cb();
@@ -360,12 +361,39 @@ class Ftpp {
         }
     }
 
-    put(file) {
+    put(file, type) {
         var _this = this;
         return new Promise(function(resolve, reject) {
-            _this.ftpConn.put(file, path.basename(file), function (err) {
+            var activeFile = path.basename(file);
+            _this.ftpConn.put(file, activeFile, function (err) {
                 if (err == null) {
                     _this.logSuccess('Upload complete', _this.truncateLocalPath(file) + '\n');
+                    if (type === Ftpp.ADD && _.has(_this.config, "uploadOptions.defaultPermissions")) {
+                        var defaultPermissions = _this.config.uploadOptions.defaultPermissions;
+                        _this.logSuccess(`Changing permissions to ${defaultPermissions}`, '\n');
+                        _this.site(`CHMOD ${defaultPermissions} ${activeFile}`).then(function (err) {
+                            if (err) {
+                                reject(err);
+                            } else {
+                                _this.logSuccess('> Complete', '\n');
+                                resolve();
+                            }
+                        });
+                    } else {
+                        resolve();
+                    }
+                } else {
+                    reject(err);
+                }
+            });
+        });
+    }
+
+    site(command) {
+        var _this = this;
+        return new Promise(function(resolve, reject) {
+            _this.ftpConn.site(command, function (err, responseText, responseCode) {
+                if (err == null) {
                     resolve();
                 } else {
                     reject(err);

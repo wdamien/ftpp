@@ -49,6 +49,10 @@ connectionRetry = 3
 ignoreInitial = true
 ignored[] = ./node_modules/**/*
 ignored[] = ./.git/**/*
+
+[uploadOptions]
+; Default file permissions used on upload.
+defaultPermissions = 644
 ```
 
 ## Why?
