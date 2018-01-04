@@ -1,6 +1,6 @@
 {
   "name": "ftpp",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "FTPPush used to watch local file and push changes to a local or remove server.",
   "main": "ftpp.js",
   "repository": {
